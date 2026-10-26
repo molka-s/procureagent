@@ -4,11 +4,12 @@ from pydantic import BaseModel, Field
 
 
 class DemandeExtraite(BaseModel):
-    article: str
-    quantite: int = Field(gt=0)
-    service: str
-    budget: Optional[float] = Field(default=None, ge=0)
-    delai: Optional[str] = None
+    article: str = Field(min_length=1, description="Désignation précise du produit ou service")
+    quantite: int = Field(gt=0, description="Quantité d'articles demandée (entier strictement positif)")
+    service: str = Field(min_length=1, description="Nom du département ou service demandeur")
+    budget: Optional[float] = Field(default=None, ge=0, description="Budget alloué ou plafond indicatif en euros")
+    delai: Optional[str] = Field(default=None, description="Délai ou date souhaitée de livraison")
+
 
 
 class ChampOCR(BaseModel):

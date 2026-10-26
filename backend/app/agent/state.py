@@ -7,6 +7,7 @@ class EtatAgent(TypedDict, total=False):
     pieces_jointes: list[str]
     demande: dict                    # DemandeExtraite
     infos_suffisantes: bool
+    question_demandeur: Optional[str]  # Question précise adressée au demandeur si statut incomplet
     document: Optional[dict]         # DocumentExtrait
     ocr_fiable: bool
     fournisseurs: list[dict]

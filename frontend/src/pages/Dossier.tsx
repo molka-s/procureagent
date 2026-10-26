@@ -85,6 +85,11 @@ function Action({ pause, vue, agir }: { pause: string; vue: Vue; agir: (c: Recor
     return (
       <div className="carte action">
         <h3>Informations manquantes</h3>
+        {vue.etat.question_demandeur && (
+          <p className="question-clarification">
+            <b>Question de l'agent :</b> {vue.etat.question_demandeur}
+          </p>
+        )}
         <textarea rows={3} value={texte} onChange={(e) => setTexte(e.target.value)} placeholder="Précisions du demandeur…" />
         <button onClick={() => agir({ demande_brute: `${vue.etat.demande_brute ?? ""}\n${texte}` })}>Envoyer</button>
       </div>

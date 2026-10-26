@@ -12,3 +12,4 @@ pytesseract
 pillow
 pytest
 httpx
+langchain-groq

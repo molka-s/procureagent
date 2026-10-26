@@ -51,3 +51,12 @@ def executer_script_sql(chemin_sql: str) -> None:
             req_clean = requete.strip()
             if req_clean:
                 conn.execute(text(req_clean))
+
+
+if __name__ == "__main__":
+    from pathlib import Path
+    chemin = Path(__file__).resolve().parent.parent / "db" / "init.sql"
+    print(f"--> Initialisation de la base PostgreSQL ({settings.database_url}) via {chemin}...")
+    executer_script_sql(str(chemin))
+    print("[OK] Base de données et modèles initialisés avec succès !")
+

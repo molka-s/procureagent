@@ -17,7 +17,8 @@ def test_chemin_nominal_approbation():
 
 def test_refus_aucune_commande():
     g = construire()
-    g.invoke({"demande_brute": "x"}, cfg("t2"))
+    g.invoke({"demande_brute": "10 écrans 27 pouces pour Design"}, cfg("t2"))
+    assert g.get_state(cfg("t2")).next == ("attente_decision",)
     g.update_state(cfg("t2"), {"decision": "refus", "motif": "hors budget"})
     g.invoke(None, cfg("t2"))
     v = g.get_state(cfg("t2")).values
@@ -27,4 +28,38 @@ def test_refus_aucune_commande():
 def test_demande_vide_demande_precisions():
     g = construire()
     g.invoke({"demande_brute": ""}, cfg("t3"))
-    assert g.get_state(cfg("t3")).next == ("attente_precisions",)
+    st = g.get_state(cfg("t3"))
+    assert st.next == ("attente_precisions",)
+    assert st.values["statut"] == "incomplet"
+    assert st.values.get("question_demandeur") is not None
+
+
+def test_demande_invalide_demande_precisions():
+    g = construire()
+    g.invoke({"demande_brute": "x"}, cfg("t4"))
+    st = g.get_state(cfg("t4"))
+    assert st.next == ("attente_precisions",)
+    assert st.values["statut"] == "incomplet"
+    assert st.values.get("question_demandeur") is not None
+
+
+def test_reprise_apres_attente_precisions():
+    g = construire()
+    # 1. Demande initiale incomplète -> pause attente_precisions avec statut incomplet et question
+    g.invoke({"demande_brute": "Je voudrais des écrans pour mon équipe"}, cfg("t5"))
+    st1 = g.get_state(cfg("t5"))
+    assert st1.next == ("attente_precisions",)
+    assert st1.values["statut"] == "incomplet"
+    assert st1.values.get("question_demandeur") is not None
+
+    # 2. Le demandeur apporte les précisions (quantité et service)
+    g.update_state(cfg("t5"), {"demande_brute": "10 écrans 27 pouces pour le service Design"})
+    g.invoke(None, cfg("t5"))
+
+    # 3. L'agent reprend, valide l'extraction et poursuit jusqu'à la validation
+    st2 = g.get_state(cfg("t5"))
+    assert st2.next == ("attente_decision",)
+    assert st2.values.get("demande") is not None
+    assert st2.values["demande"]["quantite"] == 10
+
+

@@ -3,6 +3,7 @@ export type Etat = {
   demande_brute?: string;
   pieces_jointes?: string[];
   demande?: { article?: string; quantite?: number; service?: string; budget?: number };
+  question_demandeur?: string | null;
   document?: Record<string, unknown> | null;
   fournisseurs?: { nom: string; prix_unitaire: number; autorise: boolean }[];
   violations?: string[];

@@ -25,8 +25,14 @@ frontend/                # React + Vite + TypeScript (demande, dossier, validati
 ```bash
 cp .env.example .env
 
-# Lancer PostgreSQL (Option Docker) :
+# Lancer PostgreSQL :
+# Option 1 : Docker
 docker compose up -d
+
+# Option 2 : PostgreSQL local déjà installé
+# Créer les tables et données de référence :
+cd backend
+python init_db.py
 
 # Backend :
 cd backend

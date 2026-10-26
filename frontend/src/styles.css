@@ -18,6 +18,8 @@ button.ko { background:#dc2626; color:#fff; border-color:#dc2626; }
 .badge { font-size:12px; padding:2px 10px; border-radius:99px; background:#e2e8f0; vertical-align:middle; }
 .badge.terminee { background:#dcfce7; } .badge.refusee, .badge.bloque { background:#fee2e2; }
 .badge.en_attente_validation { background:#fef3c7; }
+.badge.incomplet, .badge.precisions_demandees { background:#fed7aa; color:#9a3412; font-weight:600; }
+.question-clarification { background:#fef3c7; border-left:4px solid #d97706; padding:10px 14px; border-radius:6px; margin:4px 0 8px 0; font-size:14px; line-height:1.4; color:#78350f; }
 table { width:100%; border-collapse:collapse; font-size:13px; }
 th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--bord); }
 .deux { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
