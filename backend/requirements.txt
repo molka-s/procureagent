@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic>=2
+pydantic-settings
+python-multipart
+sqlalchemy>=2
+psycopg[binary]
+langgraph
+pymupdf
+pdfplumber
+pytesseract
+pillow
+pytest
+httpx

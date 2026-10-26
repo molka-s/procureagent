@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+env/
+venv/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Secrets & Local Environment
+.env
+.env.local
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/.vite/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploads (ignore contents but keep folder)
+data/uploads/*
+!data/uploads/.gitkeep
+
+# IDEs & System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
